@@ -32,5 +32,8 @@
 *.app
 
 # Replit
+.replit
+replit.nix
+Makefile
 .ccls-cache
 main
