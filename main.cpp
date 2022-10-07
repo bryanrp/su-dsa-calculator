@@ -1,5 +1,8 @@
+#include "include/calculator.h"
+#include "include/string_parser.h"
 #include <iostream>
+using namespace std;
 
 int main() {
-  std::cout << "test" << std::endl;
+    cout << "test" << '\n';
 }
