@@ -1,46 +1,54 @@
 #include "../include/string_parser.h"
 
 list<string> StringParser::parseExpression(string expression) {
-    // Widitra
-    return list<string>();
+  // Widitra
+  return list<string>();
 }
 
 int StringParser::findPositionOfCurrentExponentComma(string exponentFunction) {
-    // Sidan
-    return 0;
+  // Sidan
+  return 0;
 }
 
 bool StringParser::isOperator(string str) {
-    // Sidan
-    return false;
+  if (str == "+" || str == "-" || str == "*" || str == "/")
+    return true;
+  return false;
 }
 
 bool StringParser::isOperatorAdd(string str) {
-    // Sidan
-    return false;
+  if (str == "+")
+    return true;
+  return false;
 }
 
 bool StringParser::isOperatorSubtract(string str) {
-    // Sidan
-    return false;
+  if (str == "-")
+    return true;
+  return false;
 }
 
 bool StringParser::isOperatorMultiply(string str) {
-    // Sidan
-    return false;
+  if (str == "*")
+    return true;
+  return false;
 }
 
 bool StringParser::isOperatorDivide(string str) {
-    // Sidan
-    return false;
+  if (str == "/")
+    return true;
+  return false;
 }
 
 string StringParser::removeAllSpaceFromExpression(const string &expression) {
-    // Widitra
-    return expression;
+  // Widitra
+  return expression;
 }
 
 string StringParser::changeToLowercase(const string &expression) {
-    // Sidan
-    return expression;
+  string lowresult;
+  for (int i = 0; i < expression.size(); i++) {
+    lowresult = lowresult + (char)tolower(expression[i]);
+  }
+  return lowresult;
 }
