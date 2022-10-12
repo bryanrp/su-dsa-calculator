@@ -6,7 +6,7 @@ list<string> StringParser::parseExpression(string expression) {
 }
 
 int StringParser::findPositionOfCurrentExponentComma(string exponentFunction) {
-  // Sidan
+  // Angel
   return 0;
 }
 
