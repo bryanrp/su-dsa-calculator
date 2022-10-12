@@ -40,14 +40,29 @@ bool StringParser::isOperatorDivide(string str) {
   return false;
 }
 
-string StringParser::removeAllSpaceFromExpression(const string &expression) {
-  // Widitra
-  return expression;
+string StringParser::removeAllSpaceFromExpression(const string &expression)
+{
+  string notBlank;
+  for (int i = 0; i < expression.size(); i++) 
+  {
+    if (expression[i] == ' ')
+    {
+      
+    }
+      else 
+      {
+        notBlank = notBlank + (char)expression[i];  
+      }
+  }
+  
+  return notBlank;
 }
 
-string StringParser::changeToLowercase(const string &expression) {
+string StringParser::changeToLowercase(const string &expression) 
+{
   string lowresult;
-  for (int i = 0; i < expression.size(); i++) {
+  for (int i = 0; i < expression.size(); i++) 
+  {
     lowresult = lowresult + (char)tolower(expression[i]);
   }
   return lowresult;
