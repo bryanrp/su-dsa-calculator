@@ -2,7 +2,48 @@
 
 list<string> StringParser::parseExpression(string expression) {
   // Widitra
-  return list<string>();
+  expression = changeToLowercase(removeAllSpaceFromExpression(expression));
+
+    list<string> expressionList;
+    string operand;
+
+    int leftBracket = 0;
+    bool isNowNegative = false;
+
+    for (int index = 0; index < expression.size(); index++) {
+        string current(1, expression[index]); // get the index-th character as a string
+        if (current == "(") {
+            leftBracket++;
+        }
+        if (current == ")") {
+            leftBracket--;
+        }
+        // if (current character is "-") and (operand is still empty) and ((this is the first operand) or (the previous expression was an operator))
+        if (isOperatorSubtract(current) && operand.empty() && (expressionList.empty() || isOperator(expressionList.back()))) {
+            isNowNegative = true;
+        }
+
+        if (!isOperator(current) || leftBracket != 0 || isNowNegative) { // if (current character is not an operator) or (inside a bracket) or (now is negative)
+            operand += current; // add current character to operand
+        }
+        else { // if the current character is an operator
+            if (isNowNegative) {
+                operand = "(0" + operand + ")"; // operand was in form of "-x". after adding "0", it becomes "(0-x)"
+                isNowNegative = false;
+            }
+            expressionList.push_back(operand); // push the operand into the list
+            operand.clear(); // clear the operand
+            expressionList.push_back(current); // push the operator into the list
+        }
+    }
+    if (isNowNegative) {
+        operand = "(0" + operand + ")";
+        isNowNegative = false;
+    }
+    expressionList.push_back(operand);
+
+    return expressionList;
+
 }
 
 int StringParser::findPositionOfCurrentExponentComma(string exponentFunction) {
