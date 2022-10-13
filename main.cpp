@@ -4,6 +4,6 @@
 using namespace std;
 
 int main() {
-    // Angel UI
-    cout << "test" << '\n';
+  // Angel UI
+  cout << "test" << '\n';
 }

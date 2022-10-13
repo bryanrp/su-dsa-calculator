@@ -47,8 +47,18 @@ list<string> StringParser::parseExpression(string expression) {
 }
 
 int StringParser::findPositionOfCurrentExponentComma(string exponentFunction) {
-  // Angel
-  return 0;
+  int leftBracket=0;
+  int pos=-1;
+  for (int i=4; i+1<exponentFunction.size(); i++) {
+    if (exponentFunction[i]=='(') leftBracket++;
+    if (exponentFunction[i]==')') leftBracket--;
+    if (leftBracket==0 && exponentFunction[i]==',') {
+      if (pos==-1) {
+        pos=i;
+      }
+    }
+  }
+  return pos;
 }
 
 bool StringParser::isOperator(string str) {
