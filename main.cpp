@@ -100,6 +100,7 @@ int main() {
       cout << "5. sin(x)  :  sinus of x" << endl;
       cout << "6. cos(x)  :  cosinus of x" << endl;
       cout << "7. tan(x)  :  tan of x\n" << endl;
+      cout << "8. The x for the trigonometry is in radian instead of degree." << endl;
       cout << "Where would you like to go?" << endl;
       cout << "1. Calculate an expression" << endl;
       cout << "2. Back to menu" << endl;
