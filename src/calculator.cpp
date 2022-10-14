@@ -1,9 +1,68 @@
 #include "../include/calculator.h"
 #include <math.h>
+#include <queue>
+#include <stdexcept>
 
 double Calculator::calculate(string expression, bool addToHistory) {
-  // Bryan
-  return 0.0;
+  list<string> expressionList = StringParser::parseExpression(expression);
+
+  for (list<string>::iterator it = ++expressionList.begin(); it != expressionList.end(); it++) {
+    if (StringParser::isOperator(*it)) {
+      bool isMul = StringParser::isOperatorMultiply(*it);
+      bool isDiv = StringParser::isOperatorDivide(*it);
+
+      if (isMul || isDiv) {
+        double lhs = stod(processOperand(*prev(it)));
+        double rhs = stod(processOperand(*next(it)));
+        double result;
+        if (isMul) {
+          result = lhs * rhs;
+        }
+        else {
+          result = lhs / rhs;
+        }
+
+        expressionList.erase(next(it));
+        expressionList.erase(prev(it));
+        *it = to_string(result);
+      }
+      else {
+        it++; // we need to advance twice (from this and the for iterator)
+      }
+    }
+    else {
+      throw runtime_error("Expected operator in expressionList");
+    }
+  }
+
+  for (list<string>::iterator it = ++expressionList.begin(); it != expressionList.end(); it++) {
+    bool isAdd = StringParser::isOperatorAdd(*it);
+    bool isSub = StringParser::isOperatorSubtract(*it);
+    if (!isAdd && !isSub) {
+      throw runtime_error("Expected operator in expressionList");
+    }
+    else {
+      double lhs = stod(processOperand(*prev(it)));
+      double rhs = stod(processOperand(*next(it)));
+      double result;
+      if (isAdd) {
+        result = lhs + rhs;
+      }
+      else {
+        result = lhs - rhs;
+      }
+
+      expressionList.erase(next(it));
+      expressionList.erase(prev(it));
+      *it = to_string(result);
+    }
+  }
+
+  if (expressionList.size() != 1) throw runtime_error("Expected expressionList of size exactly 1");
+  expressionList.front() = processOperand(expressionList.front());
+  double result = stod(expressionList.front());
+  if (addToHistory) addHistory(expression, result);
+  return result;
 }
 
 list<string> Calculator::getHistory() {
