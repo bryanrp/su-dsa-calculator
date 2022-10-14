@@ -1,15 +1,13 @@
 #include "include/calculator.h"
 #include "include/string_parser.h"
 #include <iostream>
-#include <stdlib.h>
-#include <stdio.h>
 using namespace std;
 
 int main() {
   string name;
    Calculator calculator;
 
-	system("Color DF");
+	system("Color E8");
     cout << " _____________________  " << endl;
     cout << "|  _________________  | " << endl;
     cout << "| |                 | | " << endl;
@@ -35,13 +33,15 @@ int main() {
 		cout << "1. Calculate an expression" << endl;
 		cout << "2. Check calculator history" << endl;
 		cout << "3. Clear history" << endl;
-		cout << "4. End session" << endl;
+		cout << "4. Glossary" << endl;
+		cout << "5. End session" << endl;
 		cout << "Enter Option: ";
 		system("Color F5");//change color again because aesthetic
 		
 		int choice;
 		cin >> choice; //get menu command
 		if (choice == 1) {
+		system("cls");
       input:
 			cout << "Input your expression: ";
       string input, dummy;
@@ -49,11 +49,12 @@ int main() {
       getline(cin, input);
 			double result = calculator.calculate(input, true);
       cout << "Result:\n" << result;
-      cout <<"\nWould you like to continue calculating?\n" << "y/n";
+      cout <<"\nWould you like to continue calculating?\n" << "y/n\n";
       
       string opt1;
       cin >> opt1;
       if (opt1=="y" || opt1=="Y") {
+      	system("cls");
         goto input;
       }
       else if (opt1=="n" || opt1=="N") {
@@ -62,21 +63,35 @@ int main() {
 		}
 		else if (choice == 2) {
       list<string> history = calculator.getHistory();
+      cout << history.size() << '\n';
       if (history.empty()) {
-        cout << "There is no history detected.";
+      	system("cls");
+        cout << "There is no history detected.\n";
       }
       else {
+      	system("cls");
         int number = 1;
         for (string str : history) {
           cout << number++ << ". " << str << '\n' << endl;
         }
-      }
-			calculator.getHistory();
+    }
+        cout << "Enter any key to return\n";
+        string any;
+        cin >> any;
+        if (any=="1"){
+        	goto menu;
+		}
+		else {
+			goto menu;
+		}
 			}
 		else if (choice == 3){
 			calculator.deleteAllHistory();
 		}
     else if (choice == 4) {
+      glossary:
+      system("cls");
+      system("Color F5");
       cout << "Glossary:" << endl;
       cout << "1. sqrt(x) :  square root of x" << endl;
       cout << "2. exp(x,y):  x to the power of y" << endl;
@@ -90,15 +105,17 @@ int main() {
       cout << "2. Back to menu" << endl;
       string opt2;
       cin >> opt2;
-      if (opt2 == 1) {
+      if (opt2 == "1") {
+      	cout << '\n';
         goto input;
       }
-      else if (opt2 == 2) {
+      else if (opt2 == "2") {
         goto menu;
       }
       else {
         cout << "\nThere is no such option" << endl;
 			  system("Color 4F");
+			  goto glossary;
       }
     } 
       
