@@ -7,23 +7,20 @@ double Calculator::calculate(string expression, bool addToHistory) {
 }
 
 list<string> Calculator::getHistory() {
-  // Abhi
-  // wht is this for return list<string>();
+  // for return list<string>();
   return history;
 }
 
 void Calculator::deleteAllHistory() {
-  // Abhi
+  // clear all history
   history.clear();
 }
 
 void Calculator::addHistory(string expression, double result) {
-  // Abhi
   history.push_back(expression + "=" + to_string(result));
 }
 
 string Calculator::processOperand(string operand) {
-  // Abhi
   if (operand.substr(0, 3) == "sin") {
     operand =
         to_string(sin(calculate(operand.substr(4, operand.size() - 5), false)));
